@@ -94,7 +94,7 @@ class LINEBotTiny
     {
         error_log("message:" . print_r($message,true));
         $header = array(
-            "Content-Type: application/json",
+            "Content-Type: application/json; charset=UTF-8",
             'Authorization: Bearer ' . $this->channelAccessToken,
         );
         error_log("header:" . print_r($header,true));

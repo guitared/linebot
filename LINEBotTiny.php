@@ -105,9 +105,18 @@ class LINEBotTiny
                 "content" => json_encode($message),
             ),
         ));
-         error_log("$context:" . print_r($header,true));
-        $response = file_get_contents('https://api.line.me/v2/bot/message/reply', false, $context);
-        if (strpos($http_response_header[0], '200') === false) {
+        error_log("$context:" . print_r($header,true));
+         
+        $ch = curl_init("https://api.line.me/v2/bot/message/reply");
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
+        curl_setopt($ch, CURLOPT_HTTPHEADER,$header);
+        $response = curl_exec($ch);
+        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+        if (strpos($httpcode, '200') === false) {
             http_response_code(500);
             error_log("Request failed: " . $response);
         }

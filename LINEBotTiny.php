@@ -92,12 +92,12 @@ class LINEBotTiny
 
     public function replyMessage($message)
     {
-        error_log("message:" . print_r($message));
+        error_log("message:" . print_r($message,true));
         $header = array(
             "Content-Type: application/json",
             'Authorization: Bearer ' . $this->channelAccessToken,
         );
-        error_log("header:" . print_r($header));
+        error_log("header:" . print_r($header,true));
         $context = stream_context_create(array(
             "http" => array(
                 "method" => "POST",
@@ -105,7 +105,7 @@ class LINEBotTiny
                 "content" => json_encode($message),
             ),
         ));
-         error_log("$context:" . print_r($header));
+         error_log("$context:" . print_r($header,true));
         $response = file_get_contents('https://api.line.me/v2/bot/message/reply', false, $context);
         if (strpos($http_response_header[0], '200') === false) {
             http_response_code(500);

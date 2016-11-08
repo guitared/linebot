@@ -20,7 +20,15 @@ foreach ($client->parseEvents() as $event) {
                     ));
                     break;
                 default:
-                    error_log("Unsupporeted message type: " . $message['type']);
+                    $client->replyMessage(array(
+                        'replyToken' => $event['replyToken'],
+                        'messages' => array(
+                            array(
+                                'type' => 'text',
+                                'text' => 'งง'
+                            )
+                        )
+                    ));
                     break;
             }
             break;

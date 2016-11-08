@@ -19,7 +19,7 @@ foreach ($client->parseEvents() as $event) {
                         )
                     ));
                     break;
-                default:
+                case 'sticker':
                     $client->replyMessage(array(
                         'replyToken' => $event['replyToken'],
                         'messages' => array(
@@ -29,6 +29,8 @@ foreach ($client->parseEvents() as $event) {
                             )
                         )
                     ));
+                default:
+                    error_log("Unsupporeted message type: " . $message['type']);
                     break;
             }
             break;

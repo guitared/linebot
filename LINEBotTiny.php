@@ -114,14 +114,14 @@ class LINEBotTiny
         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($message));
         curl_setopt($ch, CURLOPT_HTTPHEADER,$header);
         $response = curl_exec($ch);
-        $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+       // $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $info = curl_getinfo($ch);
         error_log("$info:".print_r($info['request_header'],true));
         curl_close($ch);
-        if (strpos($httpcode, '200') === false) {
-            http_response_code(500);
-            error_log("Request failed: " . $response);
-        }
+        //if (strpos($httpcode, '200') === false) {
+        //    http_response_code(500);
+        //    error_log("Request failed: " . $response);
+        //}
     }
 
     private function sign($body)

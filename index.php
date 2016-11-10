@@ -16,7 +16,7 @@ foreach ($client->parseEvents() as $event) {
                         'messages' => array(
                             array(
                                 'type' => 'text',
-                                'text' => $message['text'].'\nsession_id:'.session_id()
+                                'text' => $message['text'].' user:'.$event['source']['userId']
                             )
                         )
                     ));
